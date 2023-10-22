@@ -1,0 +1,5 @@
+tailwindcss
+https://tailwindcss.com/docs/guides/create-react-app
+
+daisyui
+https://daisyui.com/docs/install/
