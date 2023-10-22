@@ -5,17 +5,24 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
 import Spinner from "../components/layout/Spinner";
 import RepoList from "../components/repos/RepoList";
 import GithubContext from "../context/github/GithubContext";
+import { fetchUserAndRepos } from "../context/github/GithubActions";
 
 const User = () => {
-  const { loading, user, repos, fetchUser, fetchRepos } =
-    useContext(GithubContext);
+  const { loading, user, repos, dispatch } = useContext(GithubContext);
   const params = useParams();
 
   useEffect(() => {
-    fetchUser(params.login);
-    fetchRepos(params.login);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch({ type: "SET_LOADING" });
+
+    // useEffect(async () => {}, []) not allowed
+    // create a new async function in useEffect instead
+    const fetchUserData = async () => {
+      const userData = await fetchUserAndRepos(params.login);
+      dispatch({ type: "FETCH_USER_AND_REPOS", payload: userData });
+    };
+
+    fetchUserData();
+  }, [dispatch, params.login]);
 
   if (loading) {
     return <Spinner />;
