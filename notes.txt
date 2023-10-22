@@ -3,3 +3,7 @@ https://tailwindcss.com/docs/guides/create-react-app
 
 daisyui
 https://daisyui.com/docs/install/
+
+terminal: git branch <branch-name>
+terminal: git checkout <branch-name>
+terminal: git branch
